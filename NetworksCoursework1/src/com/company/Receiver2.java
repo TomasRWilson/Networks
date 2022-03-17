@@ -41,7 +41,7 @@ public class Receiver2 extends Receiver implements Runnable {
         //***************************************************
         //Main loop.
         Map<Short, byte[]> holder = new HashMap<>();
-
+        Short temp = 0;
         while (running) {
 
             // sorting the vector
@@ -58,11 +58,14 @@ public class Receiver2 extends Receiver implements Runnable {
                 data.get(audioPart, 0,audioPart.length);
                 holder.put(sequence, audioPart);
 
-                if(holder.size() == 10){
+                if(holder.size() == 20){
                     TreeMap<Short, byte[]> sortedBlocks = new TreeMap<>();
                     sortedBlocks.putAll(holder);
                     for (Map.Entry<Short, byte[]> entry : sortedBlocks.entrySet()){
-                        player.playBlock(entry.getValue());
+                        if((entry.getKey() > temp) || (entry.getKey()<20)){
+                            player.playBlock(entry.getValue());
+                            temp = entry.getKey();
+                        }
                     }
                     holder.clear();
                 }
