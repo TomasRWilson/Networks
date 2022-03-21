@@ -73,7 +73,7 @@ public class Sender3 extends Sender implements Runnable {
                 //makes ByteBuffer object (different to a byte[] and unfortunately not able to be sent through the datapacket, so we just use it to add bits
                 //onto the data and then convert back into a byte[] type
                 ByteBuffer VoIPpacket = ByteBuffer.allocate(514);
-                if (idKey+1 ==100){             //the idKey gets reset once it reaches 99
+                if (idKey+1 ==10000){             //the idKey gets reset once it reaches 99
                     idKey=0;
                 }
                 idKey++;                        //increased the idKey by 1 (up to 99 then resets) every loop to give each packet a new id
